@@ -53,7 +53,7 @@ this.cameras.main.setBounds(
     0,
     0,
     54 * tileSize,
-    30 * tileSize + this.mapOffsetY
+    30 * tileSize + (this.scale.height - 10 * tileSize)
 );
     // オブジェクトの配置
     this.objects = [
