@@ -930,6 +930,32 @@ for (const obj of this.layers.decorationCollision) {
 
     this.player.y =
         this.playerBody.y + offsetY;
+// ================================
+// 部屋ごとのカメラ切り替え
+// ================================
+
+const roomWidth = 18 * 64;
+const roomHeight = 10 * 64;
+
+// プレイヤーがいる部屋の番号を求める
+const roomX = Math.floor(this.playerBody.x / roomWidth);
+const roomY = Math.floor(
+    (this.playerBody.y - this.mapOffsetY) / roomHeight
+);
+
+// 部屋が変わったときだけ、カメラを瞬時に移動
+if (
+    roomX !== this.currentRoomX ||
+    roomY !== this.currentRoomY
+) {
+    this.currentRoomX = roomX;
+    this.currentRoomY = roomY;
+
+    this.cameras.main.setScroll(
+        roomX * roomWidth,
+        roomY * roomHeight
+    );
+}
 // プレイヤーの足元を基準に描画順を決める
 const playerFootY = this.playerBody.y + 32;
 this.player.setDepth(playerFootY + 1);
