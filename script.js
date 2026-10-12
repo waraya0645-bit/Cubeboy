@@ -275,6 +275,9 @@ for (let y = 0; y < this.decorationCollisionMapData.length; y++) {
 
     this.whiteCircle.setAlpha(0.5);
     this.blackCircle.setAlpha(0.5);
+    // スティックを最前面に表示
+this.whiteCircle.setDepth(10000);
+this.blackCircle.setDepth(10001);
     // 指を押しているか
     this.isDragging = false;
 
