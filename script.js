@@ -24,10 +24,10 @@ const game = new Phaser.Game(config);
 
 function preload() {
     this.load.image('player', './images/IMG_0410.png');
-    this.load.image('front_cube','front_cube.pmg');
-    this.load.image('back_cube','back_cube.pmg');
-    this.load.image('right_cube','right_cube.pmg');
-    this.load.image('left_cube','left_cube.pmg');
+    this.load.image('front_cube','front_cube.png');
+    this.load.image('back_cube','back_cube.png');
+    this.load.image('right_cube','right_cube.png');
+    this.load.image('left_cube','left_cube.png');
     this.load.image('whiteCircle', './images/white_circle.png');
     this.load.image('blackCircle', './images/black_circle.png');
     this.load.image('0', './images/black.png');
@@ -245,7 +245,7 @@ for (let y = 0; y < this.decorationCollisionMapData.length; y++) {
     }
 }
     
-    const player = this.add.image(288, 324, 'player');
+    const player = this.add.image(288, 324, 'right_cube');
     this.player = player;
     // 当たり判定用の座標
     this.playerBody = {
@@ -404,6 +404,27 @@ function update(time, delta) {
     }
 
     const angle = Math.atan2(dy, dx);
+// 画像切り替え用の角度（0～360度）
+// 上を90度、左を180度、下を270度として扱う
+const directionDegrees =
+    (Math.atan2(-dy, dx) * 180 / Math.PI + 360) % 360;
+
+let textureKey;
+
+if (directionDegrees >= 60 && directionDegrees < 120) {
+    textureKey = 'back_cube';       // 上
+} else if (directionDegrees >= 120 && directionDegrees < 240) {
+    textureKey = 'left_cube';       // 左
+} else if (directionDegrees >= 240 && directionDegrees < 300) {
+    textureKey = 'front_cube';      // 下
+} else {
+    textureKey = 'right_cube';      // 右
+}
+
+// 画像が変わるときだけ切り替える
+if (this.player.texture.key !== textureKey) {
+    this.player.setTexture(textureKey);
+}
     const moveAmount = this.speed * (delta / 1000);
 
     // ================================
