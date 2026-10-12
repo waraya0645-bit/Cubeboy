@@ -24,10 +24,10 @@ const game = new Phaser.Game(config);
 
 function preload() {
     this.load.image('player', './images/IMG_0410.png');
-    this.load.image('front_cube','front_cube.png');
-    this.load.image('back_cube','back_cube.png');
-    this.load.image('right_cube','right_cube.png');
-    this.load.image('left_cube','left_cube.png');
+    this.load.image('front_cube','/images/front_cube.png');
+    this.load.image('back_cube','/images/back_cube.png');
+    this.load.image('right_cube','/images/right_cube.png');
+    this.load.image('left_cube','/images/left_cube.png');
     this.load.image('whiteCircle', './images/white_circle.png');
     this.load.image('blackCircle', './images/black_circle.png');
     this.load.image('0', './images/black.png');
@@ -245,7 +245,7 @@ for (let y = 0; y < this.decorationCollisionMapData.length; y++) {
     }
 }
     
-    const player = this.add.image(288, 324, 'player');
+    const player = this.add.image(288, 324, 'right_cube');
     this.player = player;
     // 当たり判定用の座標
     this.playerBody = {
