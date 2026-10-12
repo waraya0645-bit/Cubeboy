@@ -24,6 +24,10 @@ const game = new Phaser.Game(config);
 
 function preload() {
     this.load.image('player', './images/IMG_0410.png');
+    this.load.image('front_cube','front_cube.pmg');
+    this.load.image('back_cube','back_cube.pmg');
+    this.load.image('right_cube','right_cube.pmg');
+    this.load.image('left_cube','left_cube.pmg');
     this.load.image('whiteCircle', './images/white_circle.png');
     this.load.image('blackCircle', './images/black_circle.png');
     this.load.image('0', './images/black.png');
