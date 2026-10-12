@@ -352,7 +352,7 @@ for (let y = 0; y < this.decorationCollisionMapData.length; y++) {
     }
 }
     
-    const player = this.add.image(576, 132, 'right_cube');
+    const player = this.add.image(576, 132, 'front_cube');
     this.player = player;
     // 当たり判定用の座標
     this.playerBody = {
