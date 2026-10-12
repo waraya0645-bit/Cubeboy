@@ -48,6 +48,7 @@ this.layers = {
 };
     this.mapOffsetY = 4;
     const tileSize = 64;
+    this.cameras.main.setZoom(0.5);
     // オブジェクトの配置
     this.objects = [
         {
