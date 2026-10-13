@@ -69,8 +69,8 @@ this.cameras.main.setBounds(
         tileX: 32,
         tileY: 12,
         image: '201',
-        hitboxWidth: 31,
-        hitboxHeight: 30,
+        hitboxWidth: 32,
+        hitboxHeight: 32,
         interactable: false,
         interactionType: 'pickup',
         visible: false
