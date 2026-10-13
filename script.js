@@ -796,11 +796,11 @@ this.startText.on('pointerdown', () => {
         (this.playerBody.y - this.mapOffsetY) / roomHeight
     );
 
-    // その部屋へカメラを移動
-    this.cameras.main.setScroll(
-        this.currentRoomX * roomWidth,
-        this.currentRoomY * roomHeight
-    );
+    // プレイヤーを画面の中央に表示
+this.cameras.main.centerOn(
+    this.playerBody.x,
+    this.playerBody.y
+);
 
     this.startText.destroy();
 });
