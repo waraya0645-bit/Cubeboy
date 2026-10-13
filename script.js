@@ -595,6 +595,7 @@ this.input.on('pointerdown', (pointer) => {
   if (targetObject.image === '200') {
     if (targetObject.isInteracting) return;
     targetObject.isInteracting = true;
+    targetObject.interactable = false;
 
     this.interactionText.setText(
       'object:200 にインタラクトしました'
