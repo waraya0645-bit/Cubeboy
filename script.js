@@ -351,6 +351,24 @@ for (let y = 0; y < this.decorationCollisionMapData.length; y++) {
         });
     }
 }
+// ================================
+// 6. オブジェクトの表示
+// ================================
+
+this.objects.forEach((obj) => {
+
+    const objectImage = this.add.image(
+        obj.tileX * tileSize + tileSize / 2,
+        obj.tileY * tileSize + tileSize / 2 + this.mapOffsetY,
+        String(obj.image)
+    );
+
+    // オブジェクトの足元のY座標で表示順を設定
+    objectImage.setDepth(
+        obj.tileY * tileSize + tileSize + this.mapOffsetY
+    );
+
+});
     
     const player = this.add.image(576, 196, 'front_cube');
     this.player = player;
