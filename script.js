@@ -985,6 +985,112 @@ for (const obj of this.layers.decorationCollision) {
         );
     }
 }
+// ================================
+// オブジェクトとの見た目の補正
+// ================================
+
+for (const obj of this.objects) {
+
+    // オブジェクトの当たり判定の中心
+    const objectX =
+        obj.tileX * 64 + 32;
+
+    const objectY =
+        obj.tileY * 64 + 32 + this.mapOffsetY;
+
+    // 当たり判定の四辺
+    const objectLeft =
+        objectX - obj.hitboxWidth / 2;
+
+    const objectRight =
+        objectX + obj.hitboxWidth / 2;
+
+    const objectTop =
+        objectY - obj.hitboxHeight / 2;
+
+    const objectBottom =
+        objectY + obj.hitboxHeight / 2;
+
+
+    // ================================
+    // 左側のオブジェクト
+    // ================================
+
+    const leftGap =
+        objectLeft - bodyRight;
+
+    if (
+        leftGap >= 0 &&
+        leftGap < visualOffset &&
+        bodyBottom > objectTop &&
+        bodyTop < objectBottom
+    ) {
+        offsetX = Math.min(
+            offsetX,
+            -(visualOffset - leftGap)
+        );
+    }
+
+
+    // ================================
+    // 右側のオブジェクト
+    // ================================
+
+    const rightGap =
+        bodyLeft - objectRight;
+
+    if (
+        rightGap >= 0 &&
+        rightGap < visualOffset &&
+        bodyBottom > objectTop &&
+        bodyTop < objectBottom
+    ) {
+        offsetX = Math.max(
+            offsetX,
+            visualOffset - rightGap
+        );
+    }
+
+
+    // ================================
+    // 上側のオブジェクト
+    // ================================
+
+    const topGap =
+        objectTop - bodyBottom;
+
+    if (
+        topGap >= 0 &&
+        topGap < visualOffset &&
+        bodyRight > objectLeft &&
+        bodyLeft < objectRight
+    ) {
+        offsetY = Math.min(
+            offsetY,
+            -(visualOffset - topGap)
+        );
+    }
+
+
+    // ================================
+    // 下側のオブジェクト
+    // ================================
+
+    const bottomGap =
+        bodyTop - objectBottom;
+
+    if (
+        bottomGap >= 0 &&
+        bottomGap < visualOffset &&
+        bodyRight > objectLeft &&
+        bodyLeft < objectRight
+    ) {
+        offsetY = Math.max(
+            offsetY,
+            visualOffset - bottomGap
+        );
+    }
+}
     // ================================
     // プレイヤー画像を表示
     // ================================
