@@ -783,11 +783,10 @@ this.startText.setInteractive();
 this.startText.on('pointerdown', () => {
     this.gameStarted = true;
 
-    // 部屋のサイズ
     const roomWidth = 18 * 64;
     const roomHeight = 10 * 64;
 
-    // プレイヤーがいる部屋を計算
+    // プレイヤーがいる部屋を記録
     this.currentRoomX = Math.floor(
         this.playerBody.x / roomWidth
     );
@@ -796,15 +795,15 @@ this.startText.on('pointerdown', () => {
         (this.playerBody.y - this.mapOffsetY) / roomHeight
     );
 
-    // プレイヤーを画面の中央に表示
-this.cameras.main.centerOn(
-    this.playerBody.x,
-    this.playerBody.y
-);
+    // カメラをプレイヤーの位置に合わせる
+    this.cameras.main.centerOn(
+        this.playerBody.x,
+        this.playerBody.y
+    );
 
     this.startText.destroy();
 });
-
+    
 function update(time, delta) {
     if (!this.gameStarted) {
         return;
