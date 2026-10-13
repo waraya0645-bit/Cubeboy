@@ -56,7 +56,65 @@ this.cameras.main.setBounds(
     54 * tileSize,
     30 * tileSize + (this.scale.height - 10 * tileSize)
 );
-    this.inventory = {};
+this.inventory = this.inventory || {};
+
+this.interactionHandlers = {
+    // 会話
+    talk: (obj) => {
+        this.interactionText.setText(
+            obj.message || '会話できそうだ。'
+        );
+    },
+
+    // アイテムを拾う
+    pickup: (obj) => {
+        if (obj.pickedUp) return;
+
+        obj.pickedUp = true;
+        obj.interactable = false;
+        obj.visible = false;
+        obj.sprite.setVisible(false);
+
+        const itemId = obj.itemId || obj.image;
+
+        this.inventory[itemId] =
+            (this.inventory[itemId] || 0) + 1;
+    },
+
+    // 自分を消して、別のオブジェクトを出現させる
+    reveal: (obj) => {
+        if (obj.isInteracting) return;
+
+        obj.isInteracting = true;
+        obj.interactable = false;
+
+        this.interactionText.setText(
+            obj.image + ' にインタラクトしました'
+        );
+
+        this.tweens.add({
+            targets: obj.sprite,
+            alpha: 0,
+            duration: 600,
+
+            onComplete: () => {
+                obj.sprite.setVisible(false);
+                obj.visible = false;
+
+                const nextObject = this.objects.find(
+                    item => item.image === obj.revealImage
+                );
+
+                if (nextObject && nextObject.sprite) {
+                    nextObject.sprite.setAlpha(1);
+                    nextObject.sprite.setVisible(true);
+                    nextObject.visible = true;
+                    nextObject.interactable = true;
+                }
+            }
+        });
+    }
+};
     // オブジェクトの配置
     this.objects = [
         {
@@ -591,56 +649,22 @@ this.input.on('pointerdown', (pointer) => {
     // ================================
 
     if (targetObject !== null) {
-  // object:200 にインタラクト
-  if (targetObject.image === '200') {
-    if (targetObject.isInteracting) return;
-    targetObject.isInteracting = true;
-    targetObject.interactable = false;
+    const handler =
+        this.interactionHandlers[targetObject.interactionType];
 
-    this.interactionText.setText(
-      'object:200 にインタラクトしました'
-    );
-
-    this.tweens.add({
-      targets: targetObject.sprite,
-      alpha: 0,
-      duration: 600,
-      onComplete: () => {
-        targetObject.sprite.setVisible(false);
-
-        const nextObject = this.objects.find(
-          obj => obj.image === '201'
+    if (handler) {
+        handler(targetObject);
+    } else {
+        this.interactionText.setText(
+            '未定義のinteractionType: ' +
+            targetObject.interactionType
         );
-
-        if (nextObject) {
-          nextObject.sprite.setAlpha(1);
-          nextObject.sprite.setVisible(true);
-          nextObject.interactable = true;
-        }
-      }
-    });
-
-  // pickup タイプのアイテムを拾う
-  } else if (targetObject.interactionType === 'pickup') {
-    targetObject.interactable = false;
-    targetObject.visible = false;
-    targetObject.sprite.setVisible(false);
-
-    const itemId = targetObject.image;
-
-    this.inventory[itemId] =
-      (this.inventory[itemId] || 0) + 1;
-
-  } else {
-    this.interactionText.setText(
-      '成功！: ' + targetObject.interactionType
-    );
-  }
+    }
 
 } else {
-  this.interactionText.setText(
-    '対象なし：前方に近づいてください'
-  );
+    this.interactionText.setText(
+        '対象なし：前方に近づいてください'
+    );
 }
 });
 
