@@ -35,6 +35,7 @@ function preload() {
     this.load.image('100', './images/stone_wall.png');
 
     this.load.image('200', './images/dot-Mygame_20261009081021.png');
+    this.load.image('201','./images/red_key.png');
 }
 
 function create() {
@@ -59,7 +60,9 @@ this.cameras.main.setBounds(
     this.objects = [
         {
         tileX: 32,tileY: 12,image: '200',
-        hitboxWidth: 31,hitboxHeight: 30
+        hitboxWidth: 31,hitboxHeight: 30,
+        interactable: true,
+        interactionType: 'talk'
         },
     ];
 
