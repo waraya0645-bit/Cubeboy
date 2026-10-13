@@ -575,22 +575,18 @@ this.input.on('pointerdown', (pointer) => {
 
     if (targetObject !== null) {
 
-        console.log(
-            'インタラクト:',
-            targetObject.interactionType
-        );
+    // インタラクト成功
+    this.interactionText.setText(
+        '成功！: ' + targetObject.interactionType
+    );
 
-        this.debugText.setText(
-            'インタラクト: ' +
-            targetObject.interactionType
-        );
+} else {
 
-    } else {
-
-        console.log(
-            'インタラクト対象が前方にありません'
-        );
-    }
+    // インタラクト対象が見つからない
+    this.interactionText.setText(
+        '対象なし：前方に近づいてください'
+    );
+}
 });
 
     // =========================
