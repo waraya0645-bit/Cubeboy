@@ -53,7 +53,7 @@ const tileSize = 64;
 this.cameras.main.setBounds(
 0,
 0,
-54 * tileSize,
+72 * tileSize,
 30 * tileSize + (this.scale.height - 10 * tileSize)
 );
 this.inventory = this.inventory || {};
