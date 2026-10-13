@@ -65,6 +65,7 @@ this.interactionHandlers = {
 
         obj.pickedUp = true;
         obj.interactable = false;
+        obj.collidable = false;
         obj.visible = false;
         obj.sprite.setVisible(false);
 
@@ -893,31 +894,28 @@ const isColliding = (x, y) => {
     }
         // 3. オブジェクトとの当たり判定
     for (const obj of this.objects) {
-
+        if (obj.collidable === false) {
+            continue;
+        }
         // オブジェクトの中心座標
         const objectX =
             obj.tileX * 64 + 32;
-
         const objectY =
             obj.tileY * 64 + 32 + this.mapOffsetY;
 
         // 当たり判定の大きさ
         const objectHalfWidth =
             obj.hitboxWidth / 2;
-
         const objectHalfHeight =
             obj.hitboxHeight / 2;
 
         // オブジェクトの四辺
         const objectLeft =
             objectX - objectHalfWidth;
-
         const objectRight =
             objectX + objectHalfWidth;
-
         const objectTop =
             objectY - objectHalfHeight;
-
         const objectBottom =
             objectY + objectHalfHeight;
 
