@@ -72,7 +72,7 @@ this.cameras.main.setBounds(
         hitboxWidth: 31,
         hitboxHeight: 30,
         interactable: false,
-        interactionType: 'pick',
+        interactionType: 'pickup',
         visible: false
         }
     ];
