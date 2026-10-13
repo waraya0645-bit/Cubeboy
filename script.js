@@ -19,10 +19,46 @@ const config = {
         update: update
     }
 };
+// エラーを画面に表示する
+window.addEventListener('error', (event) => {
+    const box = document.createElement('pre');
+
+    box.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999999;
+        color: white;
+        background: red;
+        padding: 12px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    `;
+
+    box.textContent =
+        'JavaScriptエラー:\n' +
+        event.message + '\n' +
+        event.filename + ':' + event.lineno;
+
+    document.body.appendChild(box);
+});
 
 const game = new Phaser.Game(config);
 
 function preload() {
+    this.load.on('loaderror', (file) => {
+    const box = document.createElement('pre');
+
+    box.style.cssText =
+        'position:fixed;top:0;left:0;z-index:999999;' +
+        'background:red;color:white;padding:12px;';
+
+    box.textContent =
+        '画像の読み込み失敗:\n' +
+        file.key + '\n' + file.src;
+
+    document.body.appendChild(box);
+});
     this.load.image('player', './images/IMG_0410.png');
     this.load.image('front_cube','/images/front_cube.png');
     this.load.image('back_cube','/images/back_cube.png');
