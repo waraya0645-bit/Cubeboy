@@ -64,6 +64,16 @@ this.cameras.main.setBounds(
         interactable: true,
         interactionType: 'talk'
         },
+        {
+        tileX: 32,
+        tileY: 12,
+        image: '201',
+        hitboxWidth: 31,
+        hitboxHeight: 30,
+        interactable: false,
+        interactionType: 'talk',
+        visible: false
+        }
     ];
 
 // ================================
@@ -363,14 +373,20 @@ this.objects.forEach((obj) => {
     const objectImage = this.add.image(
         obj.tileX * tileSize + tileSize / 2,
         obj.tileY * tileSize + tileSize / 2 + this.mapOffsetY,
-        String(obj.image)
+        obj.image
     );
 
-    // オブジェクトの足元のY座標で表示順を設定
     objectImage.setDepth(
-        obj.tileY * tileSize + tileSize + this.mapOffsetY
+        obj.tileY * tileSize + tileSize / 2 + this.mapOffsetY
     );
 
+    // 最初から非表示のオブジェクトは隠す
+    if (obj.visible === false) {
+        objectImage.setVisible(false);
+    }
+
+    // オブジェクトと画像を紐づける
+    obj.sprite = objectImage;
 });
     
     const player = this.add.image(576, 196, 'front_cube');
@@ -575,14 +591,52 @@ this.input.on('pointerdown', (pointer) => {
 
     if (targetObject !== null) {
 
-    // インタラクト成功
-    this.interactionText.setText(
-        '成功！: ' + targetObject.interactionType
-    );
+    // object:200 とのインタラクト
+    if (targetObject.image === '200') {
+
+        // 二重実行を防ぐ
+        if (targetObject.isInteracting) {
+            return;
+        }
+
+        targetObject.isInteracting = true;
+
+        this.interactionText.setText(
+            'object:200 にインタラクトしました'
+        );
+
+        // object:200 をフェードアウト
+        this.tweens.add({
+            targets: targetObject.sprite,
+            alpha: 0,
+            duration: 600,
+            onComplete: () => {
+
+                // object:200 を非表示にする
+                targetObject.sprite.setVisible(false);
+
+                // object:201 を表示する
+                const nextObject = this.objects.find(
+                    obj => obj.image === '201'
+                );
+
+                if (nextObject) {
+                    nextObject.sprite.setAlpha(1);
+                    nextObject.sprite.setVisible(true);
+                    nextObject.interactable = true;
+                }
+            }
+        });
+
+    } else {
+
+        this.interactionText.setText(
+            '成功！: ' + targetObject.interactionType
+        );
+    }
 
 } else {
 
-    // インタラクト対象が見つからない
     this.interactionText.setText(
         '対象なし：前方に近づいてください'
     );
