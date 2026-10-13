@@ -59,7 +59,7 @@ this.cameras.main.setBounds(
     this.objects = [
         {
         tileX: 9,tileY: 5,image: '200',
-        hitboxWidth: 31,hitboxHeight: 31
+        hitboxWidth: 31,hitboxHeight: 30
         },
     ];
 
