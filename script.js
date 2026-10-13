@@ -782,9 +782,28 @@ this.startText.setInteractive();
 
 this.startText.on('pointerdown', () => {
     this.gameStarted = true;
+
+    // 部屋のサイズ
+    const roomWidth = 18 * 64;
+    const roomHeight = 10 * 64;
+
+    // プレイヤーがいる部屋を計算
+    this.currentRoomX = Math.floor(
+        this.playerBody.x / roomWidth
+    );
+
+    this.currentRoomY = Math.floor(
+        (this.playerBody.y - this.mapOffsetY) / roomHeight
+    );
+
+    // その部屋へカメラを移動
+    this.cameras.main.setScroll(
+        this.currentRoomX * roomWidth,
+        this.currentRoomY * roomHeight
+    );
+
     this.startText.destroy();
 });
-}
 
 function update(time, delta) {
     if (!this.gameStarted) {
