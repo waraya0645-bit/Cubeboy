@@ -66,8 +66,8 @@ this.interactionHandlers = {
         obj.pickedUp = true;
         obj.interactable = false;
         obj.collidable = false;
-        obj.visible = false;
         obj.sprite.setVisible(false);
+        obj.visible = false;
 
         const itemId = obj.itemId || obj.image;
 
@@ -91,6 +91,7 @@ this.interactionHandlers = {
             duration: 600,
 
             onComplete: () => {
+                obj.collidable = false;
                 obj.sprite.setVisible(false);
                 obj.visible = false;
 
