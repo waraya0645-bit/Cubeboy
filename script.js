@@ -58,8 +58,8 @@ this.cameras.main.setBounds(
     // オブジェクトの配置
     this.objects = [
         {
-        tileX: 27,tileY: 5,image: '200',
-        hitboxWidth: 31,hitboxHeight: 30
+        tileX: 9,tileY: 5,image: '200',
+        hitboxWidth: 32,hitboxHeight: 32
         },
     ];
 
