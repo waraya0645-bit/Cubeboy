@@ -113,7 +113,7 @@ this.interactionHandlers = {
         tileX: 32,tileY: 12,image: '200',
         hitboxWidth: 31,hitboxHeight: 30,
         interactable: true,
-        interactionType: 'reveal'
+        interactionType: 'reveal',
         revealImage: '201'
         },
         {
