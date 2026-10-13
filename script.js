@@ -59,13 +59,6 @@ this.cameras.main.setBounds(
 this.inventory = this.inventory || {};
 
 this.interactionHandlers = {
-    // 会話
-    talk: (obj) => {
-        this.interactionText.setText(
-            obj.message || '会話できそうだ。'
-        );
-    },
-
     // アイテムを拾う
     pickup: (obj) => {
         if (obj.pickedUp) return;
@@ -80,7 +73,6 @@ this.interactionHandlers = {
         this.inventory[itemId] =
             (this.inventory[itemId] || 0) + 1;
     },
-
     // 自分を消して、別のオブジェクトを出現させる
     reveal: (obj) => {
         if (obj.isInteracting) return;
@@ -121,7 +113,7 @@ this.interactionHandlers = {
         tileX: 32,tileY: 12,image: '200',
         hitboxWidth: 31,hitboxHeight: 30,
         interactable: true,
-        interactionType: 'talk'
+        interactionType: 'reveal'
         },
         {
         tileX: 32,
