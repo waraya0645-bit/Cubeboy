@@ -171,38 +171,7 @@ this.playerBody = {
 this.currentRoomX = 0;
 this.currentRoomY = 0;
 
-    // =========================
-    // スティック
-    // =========================
-    this.stickX = this.scale.width / 6;
-    this.stickY = this.scale.height * 3 / 4;
-
-    // 白い円
-    this.whiteCircle = this.add.image(
-        this.stickX,
-        this.stickY,
-        'whiteCircle'
-    );
-    this.whiteCircle.setScrollFactor(0);
-
-    // 黒い円
-    this.blackCircle = this.add.image(
-        this.stickX,
-        this.stickY,
-        'blackCircle'
-    );
-    this.blackCircle.setScrollFactor(0);
-
-    this.whiteCircle.setAlpha(0.5);
-    this.blackCircle.setAlpha(0.5);
-    // スティックを最前面に表示
-this.whiteCircle.setDepth(10000);
-this.blackCircle.setDepth(10001);
-    // 指を押しているか
-    this.isDragging = false;
-
-    // プレイヤー速度
-    this.speed = 300;
+setupJoystick(this);
 
 // ================================
 // 画面の左右で操作を分ける
@@ -210,80 +179,14 @@ this.blackCircle.setDepth(10001);
 
 this.input.on('pointerdown', (pointer) => {
 
-    // =================================
-    // 左半分：スティック操作
-    // =================================
-
-    if (pointer.x < this.scale.width / 2) {
-
-        // スティックをタップした場所へ移動
-        this.stickX = pointer.x;
-        this.stickY = pointer.y;
-
-        this.whiteCircle.x = this.stickX;
-        this.whiteCircle.y = this.stickY;
-
-        // 黒い円を中央に戻す
-        this.blackCircle.x = this.stickX;
-        this.blackCircle.y = this.stickY;
-
-        this.isDragging = true;
-
+    // 左半分：ジョイスティック操作
+    if (handleJoystickPointerDown(this, pointer)) {
         return;
     }
+
+    // 右半分：インタラクト
     handleInteraction(this);
 });
-
-    // =========================
-    // 指を動かしているとき
-    // =========================
-
-    this.input.on('pointermove', (pointer) => {
-
-        if (!this.isDragging) {
-            return;
-        }
-
-        // 白い円の中心から指までの距離
-        const dx = pointer.x - this.stickX;
-        const dy = pointer.y - this.stickY;
-
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        // 黒い円が動ける最大距離
-        const maxDistance = 30;
-
-
-        // 白い円の外へ出ないようにする
-        if (distance > maxDistance) {
-
-            const angle = Math.atan2(dy, dx);
-
-            this.blackCircle.x =
-                this.stickX + Math.cos(angle) * maxDistance;
-
-            this.blackCircle.y =
-                this.stickY + Math.sin(angle) * maxDistance;
-
-        } else {
-
-            this.blackCircle.x = pointer.x;
-            this.blackCircle.y = pointer.y;
-        }
-    });
-
-    // =========================
-    // 指を離したとき
-    // =========================
-
-    this.input.on('pointerup', () => {
-
-        this.isDragging = false;
-
-        // 黒い円を中央へ戻す
-        this.blackCircle.x = this.stickX;
-        this.blackCircle.y = this.stickY;
-    });
 
     this.debugText = this.add.text(10, 10, 'delta: --', {
         fontSize: '20px',
