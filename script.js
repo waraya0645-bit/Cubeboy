@@ -49,36 +49,7 @@ setupMapData(this);
 drawMapLayers(this, tileSize);
 drawObjects(this, tileSize);
     
-// プレイヤーの初期位置（タイル座標）
-const playerStartTileX = 27;
-const playerStartTileY = 3;
-
-// タイル座標を画面座標に変換
-const playerStartX =
-    playerStartTileX * tileSize + tileSize / 2;
-
-const playerStartY =
-    playerStartTileY * tileSize +
-    tileSize / 2 +
-    this.mapOffsetY;
-
-// プレイヤーの画像
-const player = this.add.image(
-    playerStartX,
-    playerStartY,
-    'front_cube'
-);
-
-this.player = player;
-
-// 当たり判定用の座標
-this.playerBody = {
-    x: playerStartX,
-    y: playerStartY
-};
-
-this.currentRoomX = 0;
-this.currentRoomY = 0;
+setupPlayer(this, tileSize);
 
 setupJoystick(this);
 
