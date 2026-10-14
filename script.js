@@ -53,20 +53,7 @@ setupPlayer(this, tileSize);
 
 setupJoystick(this);
 
-// ================================
-// 画面の左右で操作を分ける
-// ================================
-
-this.input.on('pointerdown', (pointer) => {
-
-    // 左半分：ジョイスティック操作
-    if (handleJoystickPointerDown(this, pointer)) {
-        return;
-    }
-
-    // 右半分：インタラクト
-    handleInteraction(this);
-});
+setupInput(this);
     
 // ================================
 // インタラクト結果の表示欄
