@@ -44,10 +44,10 @@ scene.interactionText.setText(obj.image + ' にインタラクトしました');
 },
 
 talk: (event) => {
-    console.log(event.parameters.message);
+    scene.interactionText.setText(event.parameters.message);
 },
 
 other: (event) => {
-    console.log('イベント2:', event.parameters.value);
+    scene.interactionText.setText('イベント2:', event.parameters.value);
 }
 };}
