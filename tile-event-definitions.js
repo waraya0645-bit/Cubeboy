@@ -3,6 +3,7 @@ function setupTileEventDefinitions(scene) {
         1: {
             interactionType: 'talk',
             once: true,
+            trigger: 'interact',
             parameters: {
                 message: 'こんにちは'
             }
@@ -11,6 +12,7 @@ function setupTileEventDefinitions(scene) {
         2: {
             interactionType: 'other',
             once: false,
+            trigger: 'step',
             parameters: {
                 value: 123
             }
