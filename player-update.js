@@ -52,99 +52,18 @@ if (this.player.texture.key !== textureKey) {
     const visualHalfSize = 32;
     const visualOffset = 4;
 
-    const isColliding = (x, y) =>
-    checkPlayerCollision(this, x, y, halfSize);
-    
-    // ================================
-    // X方向へ移動
-    // ================================
+// ================================
+// プレイヤー本体の移動
+// ================================
 
-    const nextX =
-        this.playerBody.x +
-        Math.cos(angle) * moveAmount;
-
-    const hitX =
-        isColliding(nextX, this.playerBody.y);
-
-    if (!hitX.hit) {
-
-        this.playerBody.x = nextX;
-
-    } else {
-
-        if (dx > 0) {
-
-            this.playerBody.x =
-                hitX.left - halfSize;
-
-        } else if (dx < 0) {
-
-            this.playerBody.x =
-                hitX.right + halfSize;
-        }
-    }
-
-
-    // ================================
-    // Y方向へ移動
-    // ================================
-
-    const nextY =
-        this.playerBody.y +
-        Math.sin(angle) * moveAmount;
-
-    const hitY =
-        isColliding(this.playerBody.x, nextY);
-
-    if (!hitY.hit) {
-
-        this.playerBody.y = nextY;
-
-    } else {
-
-        if (dy > 0) {
-
-            this.playerBody.y =
-                hitY.top - halfSize;
-
-        } else if (dy < 0) {
-
-            this.playerBody.y =
-                hitY.bottom + halfSize;
-        }
-    }
-
-
-    // ================================
-    // 1タイル幅の道への吸着
-    // ================================
-
-    const tileX =
-        Math.floor(this.playerBody.x / 64);
-
-    const tileY =
-    Math.floor(
-        (this.playerBody.y - this.mapOffsetY) / 64
-    );
-
-    const currentRow = this.layers.wallCollision[tileY];
-    if (currentRow) {
-    const upperWall = this.layers.wallCollision[tileY - 1]?.[tileX] === 1;
-    const lowerWall = this.layers.wallCollision[tileY + 1]?.[tileX] === 1;
-        const centerY =
-            tileY * 64 + 32 + this.mapOffsetY;
-
-        // 上下が壁で挟まれた1タイル幅の道
-        if (
-            upperWall &&
-            lowerWall &&
-            !hitY.hit
-        ) {
-
-            this.playerBody.y +=
-                (centerY - this.playerBody.y) * 1;
-        }
-    }
+movePlayerBody(
+    this,
+    dx,
+    dy,
+    angle,
+    moveAmount,
+    halfSize
+);
 
 // ================================
 // プレイヤー画像の位置補正
