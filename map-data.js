@@ -178,6 +178,6 @@ scene.eventMapData = Array.from(
     () => Array(72).fill(0)
 );
 
+scene.eventMapData[0][8] = 1;
 scene.eventMapData[0][9] = 1;
-scene.eventMapData[0][10] = 1;
 }
