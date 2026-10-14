@@ -41,6 +41,14 @@ function setupInteractionHandlers(scene) {
                     }
                 }
             });
-        }
-    };
+        },
+
+talk: (event) => {
+    console.log(event.parameters.message);
+},
+
+other: (event) => {
+    console.log('イベント2:', event.parameters.value);
+}
+};
 }
