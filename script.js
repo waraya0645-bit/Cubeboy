@@ -42,58 +42,8 @@ this.cameras.main.setBounds(
 );
 this.inventory = this.inventory || {};
 
-this.interactionHandlers = {
-// アイテムを拾う
-pickup: (obj) => {
-if (obj.pickedUp) return;
+setupInteractionHandlers(this);
 
-obj.pickedUp = true;  
-    obj.interactable = false;  
-    obj.collidable = false;  
-    obj.sprite.setVisible(false);  
-    obj.visible = false;  
-
-    const itemId = obj.itemId || obj.image;  
-
-    this.inventory[itemId] =  
-        (this.inventory[itemId] || 0) + 1;  
-},  
-// 自分を消して、別のオブジェクトを出現させる  
-reveal: (obj) => {  
-    if (obj.isInteracting) return;  
-
-    obj.isInteracting = true;  
-    obj.interactable = false;  
-
-    this.interactionText.setText(  
-        obj.image + ' にインタラクトしました'  
-    );  
-
-    this.tweens.add({  
-        targets: obj.sprite,  
-        alpha: 0,  
-        duration: 600,  
-
-        onComplete: () => {  
-            obj.collidable = false;  
-            obj.sprite.setVisible(false);  
-            obj.visible = false;  
-
-            const nextObject = this.objects.find(  
-                item => item.image === obj.revealImage  
-            );  
-
-            if (nextObject && nextObject.sprite) {  
-                nextObject.sprite.setAlpha(1);  
-                nextObject.sprite.setVisible(true);  
-                nextObject.visible = true;  
-                nextObject.interactable = true;  
-            }  
-        }  
-    });  
-}
-
-};
 setupObjectsData(this);
     
 setupMapData(this);
