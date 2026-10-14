@@ -187,11 +187,7 @@ this.input.on('pointerdown', (pointer) => {
     // 右半分：インタラクト
     handleInteraction(this);
 });
-
-    this.debugText = this.add.text(10, 10, 'delta: --', {
-        fontSize: '20px',
-        color: '#ffffff'
-    });
+    
 // ================================
 // インタラクト結果の表示欄
 // ================================
