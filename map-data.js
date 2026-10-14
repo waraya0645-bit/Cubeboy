@@ -179,5 +179,5 @@ scene.eventMapData = Array.from(
 );
 
 scene.eventMapData[0][8] = 1;
-scene.eventMapData[0][9] = 2;
+scene.eventMapData[0][9] = 1;
 }
