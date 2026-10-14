@@ -43,6 +43,7 @@ this.cameras.main.setBounds(
 this.inventory = this.inventory || {};
 
 setupInteractionHandlers(this);
+setupTileEventDefinitions(this);
 setupObjectsData(this);
 setupMapData(this);
     
