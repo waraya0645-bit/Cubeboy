@@ -43,36 +43,11 @@ this.cameras.main.setBounds(
 this.inventory = this.inventory || {};
 
 setupInteractionHandlers(this);
-
 setupObjectsData(this);
-    
 setupMapData(this);
     
 drawMapLayers(this, tileSize);
-// ================================
-// 6. オブジェクトの表示
-// ================================
-
-this.objects.forEach((obj) => {
-
-    const objectImage = this.add.image(
-        obj.tileX * tileSize + tileSize / 2,
-        obj.tileY * tileSize + tileSize / 2 + this.mapOffsetY,
-        obj.image
-    );
-
-    objectImage.setDepth(
-        obj.tileY * tileSize + tileSize / 2 + this.mapOffsetY
-    );
-
-    // 最初から非表示のオブジェクトは隠す
-    if (obj.visible === false) {
-        objectImage.setVisible(false);
-    }
-
-    // オブジェクトと画像を紐づける
-    obj.sprite = objectImage;
-});
+drawObjects(this, tileSize);
     
 // プレイヤーの初期位置（タイル座標）
 const playerStartTileX = 27;
