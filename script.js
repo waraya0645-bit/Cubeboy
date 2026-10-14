@@ -217,47 +217,7 @@ this.interactionText.setScrollFactor(0);
 // 最前面に表示
 this.interactionText.setDepth(10002);
 
-    this.startText = this.add.text(
-    this.scale.width / 2,
-    this.scale.height / 2,
-    'START',
-    {
-        fontSize: '48px',
-        color: '#ffffff',
-        backgroundColor: '#333333',
-        padding: {
-            x: 30,
-            y: 15
-        }
-    }
-);
-
-this.startText.setOrigin(0.5);
-this.startText.setInteractive();
-
-this.startText.on('pointerdown', () => {
-    this.gameStarted = true;
-
-    const roomWidth = 18 * 64;
-    const roomHeight = 10 * 64;
-
-    // プレイヤーがいる部屋を記録
-    this.currentRoomX = Math.floor(
-        this.playerBody.x / roomWidth
-    );
-
-    this.currentRoomY = Math.floor(
-        (this.playerBody.y - this.mapOffsetY) / roomHeight
-    );
-
-    // カメラをプレイヤーの位置に合わせる
-    this.cameras.main.centerOn(
-        this.playerBody.x,
-        this.playerBody.y
-    );
-
-    this.startText.destroy();
-});
+setupStartScreen(this);
 }
 
 function update(time, delta) {
