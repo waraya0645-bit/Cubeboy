@@ -129,8 +129,12 @@ function handleInteraction(scene) {
                 targetObject.interactionType
             );
         }
+        } else {
+        // オブジェクトがなければタイルイベントを確認
+        if (handleTileEventInteraction(scene, 64)) {
+            return;
+        }
 
-    } else {
         scene.interactionText.setText(
             '対象なし：前方に近づいてください'
         );
