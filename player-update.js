@@ -42,11 +42,11 @@ movePlayerBody(
     moveAmount,
     halfSize
 );
-
+checkTileEvent(this, 64);
+    
 // ================================
 // プレイヤー画像の位置補正
 // ================================
-
 const { offsetX, offsetY } =
     calculatePlayerVisualOffset(
         this,
