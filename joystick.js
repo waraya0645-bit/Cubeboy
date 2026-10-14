@@ -87,6 +87,7 @@ function setupJoystick(scene) {
 // ================================
 
 function handleJoystickPointerDown(scene, pointer) {
+    if (!scene.gameStarted) return;
     // 左半分以外なら処理しない
     if (pointer.x >= scene.scale.width / 2) {
         return false;
