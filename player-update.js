@@ -7,10 +7,6 @@ function updatePlayer(time, delta) {
         return;
     }
 
-    console.log("delta:", delta);
-
-    this.debugText.setText('delta: ' + delta.toFixed(2));
-
     let dx = this.blackCircle.x - this.stickX;
     let dy = this.blackCircle.y - this.stickY;
 
