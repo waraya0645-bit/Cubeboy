@@ -1,7 +1,7 @@
 
 function setupPlayer(scene, tileSize) {
     // プレイヤーの初期位置（タイル座標）
-    const playerStartTileX = 27;
+    const playerStartTileX = 26.5;
     const playerStartTileY = 3;
 
     const playerStartX =
