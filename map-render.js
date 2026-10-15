@@ -114,3 +114,34 @@ function drawMapLayers(scene, tileSize) {
         }
     }
 }
+
+// ================================
+// 現在のマップ表示を消す
+// ================================
+
+function clearMapLayers(scene) {
+
+    // 床の画像を消す
+    for (const image of scene.layers.floor) {
+        image.destroy();
+    }
+    scene.layers.floor.length = 0;
+
+    // 壁の画像を消す
+    for (const image of scene.layers.wallVisual) {
+        image.destroy();
+    }
+    scene.layers.wallVisual.length = 0;
+
+    // 装飾物の画像を消す
+    for (const image of scene.layers.decorationVisual) {
+        image.destroy();
+    }
+    scene.layers.decorationVisual.length = 0;
+
+    // 壁の当たり判定データを解除
+    scene.layers.wallCollision = [];
+
+    // 装飾の当たり判定データを消す
+    scene.layers.decorationCollision.length = 0;
+}
