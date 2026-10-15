@@ -1,0 +1,44 @@
+// ================================
+// マップBのデータ
+// ================================
+
+function setupMapBData(scene) {
+    const width = 72;
+    const height = 30;
+
+    // 1. 床の見た目
+    scene.floorMapData = Array.from(
+        { length: height },
+        () => Array(width).fill(0)
+    );
+
+    // 2. 壁の当たり判定
+    scene.wallCollisionMapData = Array.from(
+        { length: height },
+        () => Array(width).fill(0)
+    );
+
+    // 3. 壁の見た目
+    scene.wallVisualMapData = Array.from(
+        { length: height },
+        () => Array(width).fill(0)
+    );
+
+    // 4. 装飾物の当たり判定
+    scene.decorationCollisionMapData = Array.from(
+        { length: height },
+        () => Array(width).fill(0)
+    );
+
+    // 5. 装飾物の見た目
+    scene.decorationVisualMapData = Array.from(
+        { length: height },
+        () => Array(width).fill(0)
+    );
+
+    // 6. タイルイベント
+    scene.eventMapData = Array.from(
+        { length: height },
+        () => Array(width).fill(0)
+    );
+}
