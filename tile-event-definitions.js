@@ -16,7 +16,7 @@ function setupTileEventDefinitions(scene) {
             parameters: {
                 value: 123
             }
-        }
+        },
         // イベント3：マップBへ移動
         3: {
             interactionType: 'mapTransition',
