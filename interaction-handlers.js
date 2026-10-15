@@ -42,12 +42,22 @@ scene.interactionText.setText(obj.image + ' にインタラクトしました');
         }
     });
 },
-
 talk: (event) => {
     scene.interactionText.setText(event.parameters.message);
 },
 
 other: (event) => {
     scene.interactionText.setText('イベント2:', event.parameters.value);
+},
+mapTransition: (event) => {
+    const parameters = event.parameters;
+
+    switchMap(
+        scene,
+        parameters.mapId,
+        parameters.spawnX,
+        parameters.spawnY,
+        64
+    );
 }
 };}
