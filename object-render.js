@@ -17,3 +17,18 @@ function drawObjects(scene, tileSize) {
         obj.sprite = objectImage;
     });
 }
+
+// ================================
+// オブジェクトの表示を消す
+// ================================
+
+function clearObjects(scene) {
+    for (const obj of scene.objects) {
+        if (obj.sprite) {
+            obj.sprite.destroy();
+            obj.sprite = null;
+        }
+    }
+
+    scene.objects = [];
+}
