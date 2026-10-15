@@ -21,7 +21,24 @@ function setupStartScreen(scene) {
     scene.startText.setOrigin(0.5);
     scene.startText.setInteractive();
 
+    // ボタン上で押し始めたか
+    let startButtonPressed = false;
+
     scene.startText.on('pointerdown', () => {
+        startButtonPressed = true;
+    });
+
+    // ボタンから指が外れたらキャンセル
+    scene.startText.on('pointerout', () => {
+        startButtonPressed = false;
+    });
+
+    // 指を離したときにゲーム開始
+    scene.startText.on('pointerup', () => {
+        if (!startButtonPressed) return;
+
+        startButtonPressed = false;
+
         scene.gameStarted = true;
 
         const roomWidth = 18 * 64;
