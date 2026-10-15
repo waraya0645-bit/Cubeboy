@@ -17,5 +17,16 @@ function setupTileEventDefinitions(scene) {
                 value: 123
             }
         }
+        // イベント3：マップBへ移動
+        3: {
+            interactionType: 'mapTransition',
+            trigger: 'step',
+            once: false,
+            parameters: {
+                mapId: 'mapB',
+                spawnX: 5,
+                spawnY: 5
+            }
+        }
     };
 }
