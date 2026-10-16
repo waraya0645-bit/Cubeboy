@@ -33,9 +33,19 @@ function getObjectsDataForMap(mapId) {
         // マップB
         mapB: [
             {
-                tileX: 10,
-                tileY: 5,
-                image: 'player',
+                tileX: 13,
+                tileY: 3,
+                image: 'front_cube',
+            },
+            {
+                tileX: 6,
+                tileY: 8,
+                image: 'back_cube',
+            },
+            {
+                tileX: 16,
+                tileY: 6,
+                image: 'right_cube',
             }
         ]
     };
