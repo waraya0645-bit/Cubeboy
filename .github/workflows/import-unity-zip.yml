@@ -5,7 +5,7 @@ on:
     branches:
       - unity-version
     paths:
-      - 'Unity_MyGame_編集しやすい版.zip'
+      - 'Unity_MyGame.zip'
 
 permissions:
   contents: write
@@ -20,7 +20,7 @@ jobs:
 
       - name: Extract package
         run: |
-          unzip -q 'Unity_MyGame_編集しやすい版.zip' -d /tmp/unity-package
+          unzip -q 'Unity_MyGame.zip' -d /tmp/unity-package
           test -d /tmp/unity-package/unity_mygame/Assets/MyGame
           mkdir -p Assets
           cp -R /tmp/unity-package/unity_mygame/Assets/MyGame Assets/
