@@ -24,8 +24,8 @@ function setupTileEventDefinitions(scene) {
             once: false,
             parameters: {
                 mapId: 'mapB',
-                spawnX: 8.5,
-                spawnY: 29
+                spawnX: 4,
+                spawnY: 5
             }
         }
     };
