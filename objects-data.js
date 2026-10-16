@@ -38,14 +38,14 @@ function getObjectsDataForMap(mapId) {
                 image: 'front_cube',
             },
             {
-                tileX: 6,
+                tileX: 3,
                 tileY: 8,
                 image: 'back_cube',
             },
             {
-                tileX: 16,
-                tileY: 6,
-                image: 'right_cube',
+                tileX: 17,
+                tileY: 7,
+                image: 'left_cube',
             }
         ]
     };
