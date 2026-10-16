@@ -3,11 +3,11 @@
 // ================================
 
 function setupMapBData(scene) {
-    const width = 72;
-    const height = 30;
+const width = 18;
+const height = 10;
 
-    // 1. 床の見た目
-    scene.floorMapData = [
+// 1. 床の見た目
+scene.floorMapData = [
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,0],
 [0,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,0],
