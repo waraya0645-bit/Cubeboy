@@ -168,16 +168,53 @@ public class MyGameController : MonoBehaviour
                     renderer.sortingOrder = -10000;
                 }
 
+                // 壁の見た目レイヤー。0は何も置かず、100などの番号は tileImageMap で画像に変換します。
+                CreateMapVisual("WallVisual", mapData.GetWallVisual(col, row), col, row, 40);
+
+                // 装飾物の見た目レイヤー。
+                CreateMapVisual("DecorationVisual", mapData.GetDecorationVisual(col, row), col, row, 40);
+
+                // 壁の当たり判定レイヤー。見た目の有無とは独立しています。
                 if (mapData.GetWallCollision(col, row) == 1)
                 {
-                    GameObject wall = new GameObject("WallCollision_" + col + "_" + row);
-                    wall.transform.SetParent(mapRoot.transform);
-                    wall.transform.position = center;
-                    BoxCollider2D collider = wall.AddComponent<BoxCollider2D>();
-                    collider.size = new Vector2(TileSize, TileSize);
+                    CreateCollisionTile("WallCollision", col, row);
+                }
+
+                // 装飾物の当たり判定レイヤー。壁とは別に編集できます。
+                if (mapData.GetDecorationCollision(col, row) == 1)
+                {
+                    CreateCollisionTile("DecorationCollision", col, row);
                 }
             }
         }
+    }
+
+    private void CreateMapVisual(string objectPrefix, int imageId, int col, int row, int sortingOffset)
+    {
+        // 見た目レイヤーでは0を「画像なし」として扱います。
+        if (imageId == 0) return;
+
+        string assetName = mapData.GetImageName(imageId);
+        if (string.IsNullOrEmpty(assetName)) return;
+        Sprite sprite = LoadSprite(assetName);
+        if (sprite == null) return;
+
+        GameObject tile = new GameObject(objectPrefix + "_" + col + "_" + row + "_" + imageId);
+        tile.transform.SetParent(mapRoot.transform);
+        tile.transform.position = TileCenter(col, row);
+        SpriteRenderer renderer = tile.AddComponent<SpriteRenderer>();
+        renderer.sprite = sprite;
+        // Unityでは上の行ほどYが大きい（負の値が小さい）ため、行に応じて描画順を変えます。
+        renderer.sortingOrder = row * 100 + sortingOffset;
+    }
+
+    private void CreateCollisionTile(string objectPrefix, int col, int row)
+    {
+        GameObject tile = new GameObject(objectPrefix + "_" + col + "_" + row);
+        tile.transform.SetParent(mapRoot.transform);
+        tile.transform.position = TileCenter(col, row);
+        BoxCollider2D collider = tile.AddComponent<BoxCollider2D>();
+        collider.size = new Vector2(TileSize, TileSize);
     }
 
     private Vector3 TileCenter(int col, int row)
