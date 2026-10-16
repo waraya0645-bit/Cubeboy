@@ -31,7 +31,13 @@ function getObjectsDataForMap(mapId) {
         ],
 
         // マップB
-        mapB: []
+        mapB: [
+            {
+                tileX: 10,
+                tileY: 5,
+                image: 'player',
+            }
+        ]
     };
 
     return mapObjects[mapId] || [];
